@@ -9,6 +9,7 @@ store.getState()  //获取最新状态，react源码中是直接返回一个对�
 在外界使用这个方法的时候后，可以基于store.getState().n = 100 (n存储的状态值) 修改，
 这跟react源码中只能根据dispatch进行事件派发的思想不一样，所以是个bug，解决办法是深度克隆
 return JSON.parse(JSON.stringify(state));
+
 还有一个在执行subscribe中时候会返回一个函数，这个函数可以会把当前绑定的方法在事件池中移除掉，
 ，源码中xxx.splice(index,1);  （xxx是个数组，存储事件池中的方法），这样有可能会造成数组塌陷问题
 这个时候如果正好有事件派发，会导致有方法不能执行，最后的做法是xxx[index] = null;
